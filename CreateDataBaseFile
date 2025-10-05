@@ -14,3 +14,95 @@ CREATE DATABASE "XRayJournal"
 
 COMMENT ON DATABASE "XRayJournal"
     IS 'Проект к курсу ADO.NET';
+
+
+
+
+CREATE TABLE "Patient" (
+	"id" BIGINT NOT NULL UNIQUE,
+	"PatientDataID" BIGINT NOT NULL UNIQUE,
+	"XRayExamID" BIGINT NOT NULL,
+	"PatientHistoryID" BIGINT NOT NULL,
+	"DepartmentID" BIGINT NOT NULL,
+	"PatientCategoryID" BIGINT NOT NULL,
+	"SecondName" CHAR(50),
+	"FirstName" CHAR(50),
+	"ThirdName" CHAR(55),
+	"BirthDate" DATE,
+	"Sex" CHAR(7),
+	PRIMARY KEY("id")
+);
+
+
+
+
+CREATE TABLE "PatientData" (
+	"id" BIGINT NOT NULL UNIQUE,
+	"UID" CHAR(10) NOT NULL UNIQUE,
+	PRIMARY KEY("id")
+);
+
+
+
+
+CREATE TABLE "PatientHistory" (
+	"id" BIGINT NOT NULL UNIQUE,
+	"HistNumber" CHAR(15),
+	PRIMARY KEY("id")
+);
+
+
+
+
+CREATE TABLE "Department" (
+	"id" BIGINT NOT NULL UNIQUE,
+	"DepName" CHAR(50) NOT NULL UNIQUE,
+	PRIMARY KEY("id")
+);
+
+
+
+
+CREATE TABLE "XRayExam" (
+	"id" BIGINT NOT NULL UNIQUE,
+	"XRayName" CHAR(100) NOT NULL,
+	"XRayDose" DECIMAL NOT NULL,
+	"XRayShots" SMALLINT,
+	"XRayDate" DATE NOT NULL,
+	"XRayDiagnose" CHAR(100),
+	"XRayPatology" BOOLEAN,
+	"XRayCost" INTEGER,
+	"Doctor" CHAR(150),
+	"Laborant" CHAR(150),
+	"XRayModality" CHAR(20),
+	"InOperation" BOOLEAN NOT NULL DEFAULT false,
+	"Contrast" BOOLEAN NOT NULL DEFAULT false,
+	PRIMARY KEY("id")
+);
+
+
+
+
+CREATE TABLE "PatientCategory" (
+	"id" BIGINT NOT NULL UNIQUE,
+	"Category" CHAR(50) NOT NULL,
+	PRIMARY KEY("id")
+);
+
+
+
+ALTER TABLE "Patient"
+ADD FOREIGN KEY("PatientDataID") REFERENCES "PatientData"("id")
+ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE "Patient"
+ADD FOREIGN KEY("XRayExamID") REFERENCES "XRayExam"("id")
+ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE "Patient"
+ADD FOREIGN KEY("PatientHistoryID") REFERENCES "PatientHistory"("id")
+ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE "Patient"
+ADD FOREIGN KEY("DepartmentID") REFERENCES "Department"("id")
+ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE "Patient"
+ADD FOREIGN KEY("PatientCategoryID") REFERENCES "PatientCategory"("id")
+ON UPDATE NO ACTION ON DELETE NO ACTION;
