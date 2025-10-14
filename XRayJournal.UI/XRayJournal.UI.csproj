@@ -107,15 +107,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\XRayJournal.BLL\XRayJournal.BLL.csproj">
-      <Project>{72a158b5-6e54-4141-af95-1f8d434ad000}</Project>
-      <Name>XRayJournal.BLL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\XRayJournal.Core\XRayJournal.Core.csproj">
-      <Project>{3edda0ff-6c27-4885-9cfc-e61b0c8fc09f}</Project>
-      <Name>XRayJournal.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.1" />
-    <PackageReference Include="Npgsql" Version="9.0.3" />
+    <ProjectReference Include="..\XRayJournal.Core2\XRayJournal.Core2.csproj" />
+    <ProjectReference Include="..\XRayJournal.DAL2\XRayJournal.DAL2.csproj" />
   </ItemGroup>
 
 </Project>

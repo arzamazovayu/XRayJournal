@@ -37,5 +37,6 @@ namespace XRayJournal.UI
         {
             Application.Current.Shutdown();
         }
+
     }
 }

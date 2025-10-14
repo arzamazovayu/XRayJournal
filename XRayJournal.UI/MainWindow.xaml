@@ -18,7 +18,8 @@
                 <MenuItem x:Name="Exit" Header="Закрыть программу" Click="Exit_Click"/>
             </MenuItem>
         </Menu>
-        <Button x:Name="AddWinButton" Content="Добавить запись" HorizontalAlignment="Left" Margin="25,10,0,0" Grid.Row="2" VerticalAlignment="Top" Height="25" Width="100"/>
+        <Button x:Name="AddWinButton" Content="Добавить запись" HorizontalAlignment="Left" Margin="25,10,0,0" 
+				Grid.Row="2" VerticalAlignment="Top" Height="25" Width="100"/>
 
     </Grid>
 </Window>
