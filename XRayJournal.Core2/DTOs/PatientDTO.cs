@@ -12,6 +12,11 @@ namespace XRayJournal.Core2.DTOs
         public string SecondName { get; set; }
         public string FirstName { get; set; }
         public string ThirdName { get; set; }
-        public DateOnly BirthDate { get; set; } //нужно найти тип данных для даты
+        public DateOnly BirthDate { get; set; }
+        public string Sex { get; set; }
+        public override string ToString()
+        {
+            return $"{Id} {SecondName} {FirstName} {ThirdName} {BirthDate} {Sex}";
+        }
     }
 }

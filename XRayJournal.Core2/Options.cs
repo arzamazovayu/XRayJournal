@@ -12,7 +12,6 @@ namespace XRayJournal.Core2
         {
             get
             {
-                //return "Server = localhost; Port = 5432; User Id = postgres; Password = Flvby1; Database = XRayJournal;";
                 return Environment.GetEnvironmentVariable("postgres");
             }
         }

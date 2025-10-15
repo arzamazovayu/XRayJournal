@@ -1,0 +1,81 @@
+﻿<Window x:Class="XRayJournal.UI2.SearchPatientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:XRayJournal.UI2"
+        mc:Ignorable="d"
+        Title="SearchPatientWindow" Height="299" Width="800" Background="#FF171717">
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="Button">
+            <Setter Property="Background" Value="#FF353535"/>
+            <Setter Property="Foreground" Value="Silver"/>
+            <Setter Property="BorderThickness" Value="0.5"/>
+            <Setter Property="Padding" Value="1,1,1,1"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="1,1,1,1"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="#FF2D2D2D"/>
+                    <Setter Property="Foreground" Value="Gray"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="Background" Value="#FF2D2D2D"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="TextBox" x:Key="TextBox">
+            <Setter Property ="Background" Value="#FF353535" />
+            <Setter Property ="Foreground" Value="#FFD4D4D4"/>
+            <Setter Property ="VerticalContentAlignment" Value ="Stretch"/>
+            <Setter Property ="HorizontalContentAlignment" Value ="Stretch"/>
+            <Setter Property ="Margin" Value="0"/>
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="IdEnterTextBox" TextWrapping="Wrap" Text="" 
+                     Background="#FF353535" Foreground="#FFD4D4D4" 
+                     Grid.Column="1" Grid.Row="2" Margin="0"
+                     VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                     Style="{StaticResource ResourceKey=TextBox}"/>
+            <Label Content="Введите id пациента" Foreground="#FFD4D4D4" 
+                   Grid.Column="1" Grid.Row="1" 
+                   VerticalContentAlignment="Stretch" HorizontalContentAlignment="Center"/>
+            <TextBox x:Name="PatientInfoTextBox" TextWrapping="Wrap" Text="" IsReadOnly="True" 
+                     Background="#FF353535" Foreground="#FFD4D4D4" 
+                     Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="5" Margin="0" HorizontalScrollBarVisibility="Auto" Padding="3,0,0,0"
+                     Style="{StaticResource ResourceKey=TextBox}" />
+            <Button x:Name="SearchButton" Content="Поиск" 
+                    Grid.Column="1" Grid.Row="8" Click="SearchButton_Click"
+                    Style="{StaticResource ResourceKey=Button}" Margin="1,1,1,1" />
+            <Button x:Name="CloseButton" Content="Закрыть" 
+                    Grid.Column="5" Grid.Row="8" Click="CloseButton_Click"
+                    Style="{StaticResource ResourceKey=Button}" Margin="1,1,1,1"/>
+            <Button x:Name="DeleteButton" Grid.Column="4" Content="Удалить пациента" Grid.Row="8"
+                    Style="{StaticResource ResourceKey=Button}"  Margin="1,1,1,1" Click="DeleteButton_Click"/>
+        </Grid>
+    </DockPanel>
+</Window>
