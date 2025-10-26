@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:XRayJournal.UI2"
         mc:Ignorable="d"
-        Title="AddPatientWindow" Height="200" Width="800" Background="#FF171717">
+        Title="AddPatientWindow" Height="200" Width="800" Background="#FF171717" ResizeMode="NoResize">
     <Window.Resources>
         <Style TargetType="TextBox" x:Key="EnterField">
             <Setter Property="BorderBrush" Value="Gray"/>

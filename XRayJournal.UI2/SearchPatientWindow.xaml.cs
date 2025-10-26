@@ -1,17 +1,19 @@
 ﻿using System.Windows;
 using XRayJournal.Core2.DTOs;
-using XRayJournal.DAL2;
+using XRayJournal.BLL2;
 
 namespace XRayJournal.UI2
 {
     public partial class SearchPatientWindow : Window
     {
+        private PatientLogic _patientLogic; // Вызов бизнес-логики без необходимости делать это каждый раз в каждом методе
+        private PatientDTO _currentPatient; // Поле для работы с текущим пациентом в данном окне
         public SearchPatientWindow()
         {
             InitializeComponent();
+            _patientLogic = new PatientLogic(); // инициализация поля, чтобы оно не было null
         }
 
-        private PatientDTO _currentPatient;
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -27,8 +29,8 @@ namespace XRayJournal.UI2
                     InfoTextBox.Text = "Ошибка: введите корректный id пациента!";
                     return;
                 }
-                // Получаем пациента из базы
-                _currentPatient = new PatientRepository().GetPatientById(patientId);
+                // Получаем пациента из базы через BLL
+                _currentPatient = _patientLogic.GetPatientById(patientId);
                 // Заполняем текстбоксы данными пациента
                 FillPatientFields(_currentPatient);
             }
@@ -43,14 +45,15 @@ namespace XRayJournal.UI2
             try
             {
                 // Проверяем корректность ввода Id
-                if (!int.TryParse(IdEnterTextBox.Text, out int patientId))
+                if (_currentPatient == null)
                 {
-                    InfoTextBox.Text = "Ошибка: введите id пациента!";
+                    InfoTextBox.Text = "Ошибка: сначала найдите пациента для удаления!";
                     return;
                 }
-                new PatientRepository().DeletePatient(patientId);
-
-                InfoTextBox.Text = $"Пациент с Id {patientId} удалён.";
+                _patientLogic.DeletePatient(_currentPatient.Id);
+                ClearFields();
+                InfoTextBox.Text = $"Пациент с Id {_currentPatient.Id} удалён.";
+                _currentPatient = null;
             }
             catch (Exception ex)
             {
@@ -68,7 +71,7 @@ namespace XRayJournal.UI2
                     return;
                 }
                 // Создаем "нового" пациента из полей для обновления
-                PatientDTO updatedPatient = new PatientDTO()
+                var updatedPatient = new PatientDTO()
                 {
                     Id = _currentPatient.Id,
                     SecondName = PatientSecondNameTextBox.Text.Trim(),
@@ -78,17 +81,8 @@ namespace XRayJournal.UI2
                     Sex = PatientSexTextBox.Text.Trim()
                 };
 
-                // Проверка обязательных полей
-                if (string.IsNullOrWhiteSpace(updatedPatient.SecondName) ||
-                    string.IsNullOrWhiteSpace(updatedPatient.FirstName) ||
-                    string.IsNullOrWhiteSpace(updatedPatient.Sex))
-                {
-                    InfoTextBox.Text = "Ошибка: введите ФИ и пол пациента полностью!";
-                    return;
-                }
-
-                // Обновляем пациента в базе
-                new PatientRepository().UpdatePatient(updatedPatient);
+                // Обновляем пациента в базе через BLL
+                _patientLogic.UpdatePatient(updatedPatient);
                 _currentPatient = updatedPatient;
 
                 InfoTextBox.Text = "Данные пациента успешно обновлены!";
@@ -107,6 +101,16 @@ namespace XRayJournal.UI2
             PatientThirdNameTextBox.Text = patient.ThirdName;
             PatientBirthDateTextBox.Text = patient.BirthDate.ToString("dd.MM.yyyy");
             PatientSexTextBox.Text = patient.Sex;
+        }
+
+        private void ClearFields()
+        {
+            PatientIDTextBox.Text = string.Empty;
+            PatientSecondNameTextBox.Text = string.Empty;
+            PatientFirstNameTextBox.Text = string.Empty;
+            PatientThirdNameTextBox.Text = string.Empty;
+            PatientBirthDateTextBox.Text = string.Empty;
+            PatientSexTextBox.Text = string.Empty;
         }
     }
 }

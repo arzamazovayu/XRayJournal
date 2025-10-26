@@ -13,14 +13,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using XRayJournal.Core2.DTOs;
 using XRayJournal.DAL2;
+using XRayJournal.BLL2;
 
 namespace XRayJournal.UI2
 {
     public partial class AddPatientWindow : Window
     {
+        private PatientLogic _patientLogic;
+
         public AddPatientWindow()
         {
             InitializeComponent();
+            _patientLogic = new PatientLogic();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -68,7 +72,7 @@ namespace XRayJournal.UI2
                         Sex = selectedSex
                     };
                 //добавляем пациента в базу
-                new PatientRepository().AddPatient(patient);
+                _patientLogic.AddPatient(patient);
 
                 InfoBox.Text = $"Пациент {patient.SecondName} добавлен.";
                 //чистим поля

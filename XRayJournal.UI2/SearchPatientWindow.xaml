@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:XRayJournal.UI2"
         mc:Ignorable="d"
-        Title="SearchPatientWindow" Height="299" Width="800" Background="#FF171717">
+        Title="SearchPatientWindow" Height="299" Width="820" Background="#FF171717" ResizeMode="NoResize" SizeToContent="Height">
     <Window.Resources>
         <Style TargetType="Button" x:Key="Button">
             <Setter Property="Background" Value="#FF353535"/>
@@ -64,7 +64,8 @@
             <Label Content="Введите id пациента" Foreground="#FFD4D4D4" 
                    Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"
                    VerticalContentAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0,0,0,33" Grid.RowSpan="2"/>
-            <TextBox x:Name="InfoTextBox" TextWrapping="Wrap" Text="" IsReadOnly="True" Grid.ColumnSpan="6" Background="#FF171717"
+            <TextBox x:Name="InfoTextBox" TextWrapping="Wrap" Text="Для изменения данных о пациенте проведите поиск и измените данные в соответствующих ячейках" 
+                     IsReadOnly="True" Grid.ColumnSpan="6" Background="#FF171717"
                      Grid.Column="1" Grid.Row="3" HorizontalScrollBarVisibility="Auto" Padding="3,0,0,0"
                      Style="{StaticResource ResourceKey=TextBox}" Margin="0,0,0,32" Grid.RowSpan="2" BorderBrush="{x:Null}" />
             <TextBox x:Name="PatientIDTextBox" TextWrapping="Wrap" Text="" IsReadOnly="True" 
