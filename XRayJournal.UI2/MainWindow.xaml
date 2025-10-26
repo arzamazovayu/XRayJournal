@@ -12,10 +12,40 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="45"/>
         </Grid.RowDefinitions>
-        <DataGrid x:Name="dgPatients" d:ItemsSource="{d:SampleData ItemCount=5}" 
-                  Margin="0,0,0,0" Grid.Row="1" Background="#FF171717" BorderBrush="#FF13406B" 
-                  AlternatingRowBackground="#FF888888" RowBackground="#FF4E4E4E" 
-                  HeadersVisibility="Column" Padding="1,0,0,0" ColumnWidth="Auto">
+        <DataGrid x:Name="dgPatients" 
+          Margin="0,0,0,0" 
+          Grid.Row="1" 
+          Background="#FF171717" 
+          BorderBrush="#FF13406B" 
+          AlternatingRowBackground="#FF888888" 
+          RowBackground="#FF4E4E4E" 
+          HeadersVisibility="Column" 
+          Padding="1,0,0,0" 
+          ColumnWidth="Auto"
+          AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <!-- Колонки пациента -->
+                <DataGridTextColumn Header="ID" Binding="{Binding PatientId}" Width="40"/>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding SecondName}" Width="120"/>
+                <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="120"/>
+                <DataGridTextColumn Header="Отчество" Binding="{Binding ThirdName}" Width="120"/>
+                <DataGridTextColumn Header="Дата рождения" Binding="{Binding BirthDate, StringFormat=dd.MM.yyyy}" Width="80"/>
+                <DataGridTextColumn Header="Пол" Binding="{Binding Sex}" Width="50"/>
+
+                <!-- Колонки исследования -->
+                <DataGridTextColumn Header="ID иссл." Binding="{Binding XRayId}" Width="60"/>
+                <DataGridTextColumn Header="Исследование" Binding="{Binding XRayName}" Width="100"/>
+                <DataGridTextColumn Header="Доза" Binding="{Binding XRayDose}" Width="60"/>
+                <DataGridTextColumn Header="Снимки" Binding="{Binding XRayShots}" Width="20"/>
+                <DataGridTextColumn Header="Дата иссл." Binding="{Binding XRayDate, StringFormat=dd.MM.yyyy}" Width="80"/>
+                <DataGridCheckBoxColumn Header="Патология" Binding="{Binding XRayPatology}" Width="40"/>
+                <DataGridTextColumn Header="Стоимость" Binding="{Binding XRayCost}" Width="70"/>
+                <DataGridTextColumn Header="Врач" Binding="{Binding Doctor}" Width="120"/>
+                <DataGridTextColumn Header="Лаборант" Binding="{Binding Laborant}" Width="120"/>
+                <DataGridTextColumn Header="Модальность" Binding="{Binding XRayModality}" Width="40"/>
+                <DataGridCheckBoxColumn Header="В операции" Binding="{Binding InOperation}" Width="40"/>
+                <DataGridCheckBoxColumn Header="Контраст" Binding="{Binding Contrast}" Width="40"/>
+            </DataGrid.Columns>
             <DataGrid.ColumnHeaderStyle>
                 <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="#FF353535"/>
