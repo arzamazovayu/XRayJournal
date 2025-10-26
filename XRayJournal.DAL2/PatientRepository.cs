@@ -115,5 +115,26 @@ namespace XRayJournal.DAL2
 
             }
         }
+        public void UpdatePatient(PatientDTO patient)
+        {
+            using (NpgsqlConnection connection = new NpgsqlConnection(Options.ConnectionString))
+            {
+                connection.Open();
+                NpgsqlCommand command = new NpgsqlCommand(PatientQuery.UpdatePatientById, connection);
+
+                command.Parameters.Add(new NpgsqlParameter("@id", patient.Id));
+                command.Parameters.Add(new NpgsqlParameter("@secondName", patient.SecondName));
+                command.Parameters.Add(new NpgsqlParameter("@firstName", patient.FirstName));
+                command.Parameters.Add(new NpgsqlParameter("@thirdName", patient.ThirdName));
+                command.Parameters.Add(new NpgsqlParameter("@birthDate", patient.BirthDate));
+                command.Parameters.Add(new NpgsqlParameter("@sex", patient.Sex));
+
+                int rowsAffected = command.ExecuteNonQuery();
+                if (rowsAffected == 0) 
+                {
+                    throw new Exception("Не удалось обновить данные пациента");
+                }
+            }
+        }
     }
 }

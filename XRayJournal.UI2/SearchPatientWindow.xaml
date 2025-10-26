@@ -49,33 +49,54 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10"/>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="10"/>
             </Grid.ColumnDefinitions>
             <TextBox x:Name="IdEnterTextBox" TextWrapping="Wrap" Text="" 
-                     Background="#FF353535" Foreground="#FFD4D4D4" 
-                     Grid.Column="1" Grid.Row="2" Margin="0"
+                     Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"
                      VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"
-                     Style="{StaticResource ResourceKey=TextBox}"/>
+                     Style="{StaticResource ResourceKey=TextBox}" Margin="0,0,0,33" Grid.RowSpan="2"/>
             <Label Content="Введите id пациента" Foreground="#FFD4D4D4" 
-                   Grid.Column="1" Grid.Row="1" 
-                   VerticalContentAlignment="Stretch" HorizontalContentAlignment="Center"/>
-            <TextBox x:Name="PatientInfoTextBox" TextWrapping="Wrap" Text="" IsReadOnly="True" 
-                     Background="#FF353535" Foreground="#FFD4D4D4" 
-                     Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="5" Margin="0" HorizontalScrollBarVisibility="Auto" Padding="3,0,0,0"
-                     Style="{StaticResource ResourceKey=TextBox}" />
+                   Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"
+                   VerticalContentAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0,0,0,33" Grid.RowSpan="2"/>
+            <TextBox x:Name="InfoTextBox" TextWrapping="Wrap" Text="" IsReadOnly="True" Grid.ColumnSpan="6" Background="#FF171717"
+                     Grid.Column="1" Grid.Row="3" HorizontalScrollBarVisibility="Auto" Padding="3,0,0,0"
+                     Style="{StaticResource ResourceKey=TextBox}" Margin="0,0,0,32" Grid.RowSpan="2" BorderBrush="{x:Null}" />
+            <TextBox x:Name="PatientIDTextBox" TextWrapping="Wrap" Text="" IsReadOnly="True" 
+                     Grid.Column="1" Grid.Row="4" HorizontalScrollBarVisibility="Auto" Padding="3,0,0,0"
+                     Style="{StaticResource ResourceKey=TextBox}" Margin="0,0,0,32" Grid.RowSpan="2" />
+            <TextBox x:Name="PatientSecondNameTextBox" TextWrapping="Wrap" Text="" IsReadOnly="True" 
+                     Grid.Column="2" Grid.Row="4" HorizontalScrollBarVisibility="Auto" Padding="3,0,0,0"
+                     Style="{StaticResource ResourceKey=TextBox}" Margin="0,0,0,32" Grid.RowSpan="2" />
+            <TextBox x:Name="PatientFirstNameTextBox" TextWrapping="Wrap" Text="" IsReadOnly="False" 
+                     Grid.Column="3" Grid.Row="4" HorizontalScrollBarVisibility="Auto" Padding="3,0,0,0"
+                     Style="{StaticResource ResourceKey=TextBox}" Margin="0,0,0,32" Grid.RowSpan="2" />
+            <TextBox x:Name="PatientThirdNameTextBox" TextWrapping="Wrap" Text="" IsReadOnly="False" 
+                     Grid.Column="4" Grid.Row="4" HorizontalScrollBarVisibility="Auto" Padding="3,0,0,0"
+                     Style="{StaticResource ResourceKey=TextBox}" Margin="0,0,0,32" Grid.RowSpan="2" />
+            <TextBox x:Name="PatientBirthDateTextBox" TextWrapping="Wrap" Text="" IsReadOnly="False" 
+                     Grid.Column="5" Grid.Row="4" HorizontalScrollBarVisibility="Auto" Padding="3,0,0,0"
+                     Style="{StaticResource ResourceKey=TextBox}" Margin="0,0,0,32" Grid.RowSpan="2" />
+            <TextBox x:Name="PatientSexTextBox" TextWrapping="Wrap" Text="" IsReadOnly="False" 
+                     Grid.Column="6" Grid.Row="4" HorizontalScrollBarVisibility="Auto" Padding="3,0,0,0"
+                     Style="{StaticResource ResourceKey=TextBox}" Margin="0,0,0,32" Grid.RowSpan="2" />
+
             <Button x:Name="SearchButton" Content="Поиск" 
-                    Grid.Column="1" Grid.Row="8" Click="SearchButton_Click"
+                    Grid.Column="1" Grid.Row="8" Click="SearchButton_Click" Grid.ColumnSpan="2"
                     Style="{StaticResource ResourceKey=Button}" Margin="1,1,1,1" />
             <Button x:Name="CloseButton" Content="Закрыть" 
-                    Grid.Column="5" Grid.Row="8" Click="CloseButton_Click"
+                    Grid.Column="6" Grid.Row="8" Click="CloseButton_Click"
                     Style="{StaticResource ResourceKey=Button}" Margin="1,1,1,1"/>
-            <Button x:Name="DeleteButton" Grid.Column="4" Content="Удалить пациента" Grid.Row="8"
+            <Button x:Name="DeleteButton" Grid.Column="5" Content="Удалить пациента" Grid.Row="8"
                     Style="{StaticResource ResourceKey=Button}"  Margin="1,1,1,1" Click="DeleteButton_Click"/>
+            <Button x:Name="ConfirmButton" Grid.Column="3" Content="Сохранить изменения" Grid.Row="8"
+                    Style="{StaticResource ResourceKey=Button}"  Margin="1,1,1,1" Click="ConfirmButton_Click" />
+
         </Grid>
     </DockPanel>
 </Window>

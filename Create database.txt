@@ -1,0 +1,136 @@
+CREATE DATABASE "XRayJournal"
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'Russian_Russia.1251'
+    LC_CTYPE = 'Russian_Russia.1251'
+    TABLESPACE = my_tablespace1
+    CONNECTION LIMIT = 1
+    IS_TEMPLATE = False;
+
+COMMENT ON DATABASE "XRayJournal"
+    IS 'Проект к курсу ADO.NET';
+
+CREATE TABLE IF NOT EXISTS public."Department"
+(
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
+    "DepName" character(50) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT "Department_pkey" PRIMARY KEY (id)
+        USING INDEX TABLESPACE my_tablespace1,
+    CONSTRAINT "Department_DepName_key" UNIQUE ("DepName")
+        USING INDEX TABLESPACE my_tablespace1
+)
+
+TABLESPACE my_tablespace1;
+
+ALTER TABLE IF EXISTS public."Department"
+    OWNER to postgres;
+
+CREATE TABLE IF NOT EXISTS public."Patient"
+(
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
+    "PatientDataID" bigint,
+    "XRayExamID" bigint,
+    "PatientHistoryID" bigint,
+    "DepartmentID" bigint,
+    "PatientCategoryID" bigint,
+    "SecondName" character(50) COLLATE pg_catalog."default",
+    "FirstName" character(50) COLLATE pg_catalog."default",
+    "ThirdName" character(55) COLLATE pg_catalog."default",
+    "BirthDate" date,
+    "Sex" character varying(255) COLLATE pg_catalog."default",
+    CONSTRAINT "Patient_pkey" PRIMARY KEY (id)
+        USING INDEX TABLESPACE my_tablespace1,
+    CONSTRAINT "Patient_PatientDataID_key" UNIQUE ("PatientDataID")
+        USING INDEX TABLESPACE my_tablespace1,
+    CONSTRAINT "Patient_DepartmentID_fkey" FOREIGN KEY ("DepartmentID")
+        REFERENCES public."Department" (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT "Patient_PatientCategoryID_fkey" FOREIGN KEY ("PatientCategoryID")
+        REFERENCES public."PatientCategory" (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT "Patient_PatientDataID_fkey" FOREIGN KEY ("PatientDataID")
+        REFERENCES public."PatientData" (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT "Patient_PatientHistoryID_fkey" FOREIGN KEY ("PatientHistoryID")
+        REFERENCES public."PatientHistory" (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT "Patient_XRayExamID_fkey" FOREIGN KEY ("XRayExamID")
+        REFERENCES public."XRayExam" (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE my_tablespace1;
+
+ALTER TABLE IF EXISTS public."Patient"
+    OWNER to postgres;
+
+CREATE TABLE IF NOT EXISTS public."PatientCategory"
+(
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
+    "Category" character(50) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT "PatientCategory_pkey" PRIMARY KEY (id)
+        USING INDEX TABLESPACE my_tablespace1
+)
+
+TABLESPACE my_tablespace1;
+
+ALTER TABLE IF EXISTS public."PatientCategory"
+    OWNER to postgres;
+
+CREATE TABLE IF NOT EXISTS public."PatientData"
+(
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
+    "UID" character(10) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT "PatientData_pkey" PRIMARY KEY (id)
+        USING INDEX TABLESPACE my_tablespace1,
+    CONSTRAINT "PatientData_UID_key" UNIQUE ("UID")
+        USING INDEX TABLESPACE my_tablespace1
+)
+
+TABLESPACE my_tablespace1;
+
+ALTER TABLE IF EXISTS public."PatientData"
+    OWNER to postgres;
+
+CREATE TABLE IF NOT EXISTS public."PatientHistory"
+(
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
+    "HistNumber" character(15) COLLATE pg_catalog."default",
+    CONSTRAINT "PatientHistory_pkey" PRIMARY KEY (id)
+        USING INDEX TABLESPACE my_tablespace1
+)
+
+TABLESPACE my_tablespace1;
+
+ALTER TABLE IF EXISTS public."PatientHistory"
+    OWNER to postgres;
+
+CREATE TABLE IF NOT EXISTS public."XRayExam"
+(
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
+    "XRayName" character(100) COLLATE pg_catalog."default" NOT NULL,
+    "XRayDose" numeric NOT NULL,
+    "XRayShots" smallint,
+    "XRayDate" date NOT NULL,
+    "XRayDiagnose" character(100) COLLATE pg_catalog."default",
+    "XRayPatology" boolean,
+    "XRayCost" integer,
+    "Doctor" character(150) COLLATE pg_catalog."default",
+    "Laborant" character(150) COLLATE pg_catalog."default",
+    "XRayModality" character(20) COLLATE pg_catalog."default",
+    "InOperation" boolean NOT NULL DEFAULT false,
+    "Contrast" boolean NOT NULL DEFAULT false,
+    CONSTRAINT "XRayExam_pkey" PRIMARY KEY (id)
+        USING INDEX TABLESPACE my_tablespace1
+)
+
+TABLESPACE my_tablespace1;
+
+ALTER TABLE IF EXISTS public."XRayExam"
+    OWNER to postgres;
